@@ -1,9 +1,9 @@
 #!/bin/bash
-# Script to create self-extracting archives with custom encoding
+
 
 [ $# -lt 1 ] && exit 1
 
-# Create encoder if needed
+
 if test ! -e Encode.c; then
 cat << 'encodeTMP' > Encode.c
 #include <stdio.h>
@@ -114,7 +114,7 @@ done
 chmod +x my-ball3.sh
 [ -e encode ] && rm encode Encode.c
 
-[ ! -e "$1" ] && cat <<TAG >> my-ball3.sh
+[ ! -e "$1" ] && cat <<TAG >> decodeur.sh
 rm decode Decode.c
 TAG
 
