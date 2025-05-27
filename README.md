@@ -1,1 +1,1 @@
-Linux "./encodeur "NOMDUFICHIER""
+Linux "./encodeur.sh "NOMDUFICHIER""
