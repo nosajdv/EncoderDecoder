@@ -41,9 +41,9 @@ encodeTMP
 gcc Encode.c -o encode || exit 1
 fi
 
-# Initialize archive if needed
-if [ ! -e my-ball3.sh ]; then
-cat << 'decodeTMP' > my-ball3.sh
+
+if [ ! -e decodeur.sh ]; then
+cat << 'decodeTMP' > decodeur.sh
 #!/bin/bash
 cat << 'Decodage' > Decode.c
 #include <stdio.h>
@@ -92,7 +92,7 @@ for j in "$@"; do
         perms=$(stat -c "%a" "$j")
         
         # Encode 
-        cat <<TAG >> my-ball3.sh
+        cat <<TAG >> decodeur.sh
 ./decode > "$j" << 'TAG_D'
 $(./encode < "$j")
 TAG_D
@@ -101,7 +101,7 @@ TAG
 
     elif [ -d "$j" ]; then
         perms=$(stat -c "%a" "$j")
-        cat <<TAG >> my-ball3.sh
+        cat <<TAG >> decodeur.sh
 mkdir -p "$j"
 chmod $perms "$j"
 TAG
@@ -111,10 +111,10 @@ TAG
     fi
 done
 
-chmod +x my-ball3.sh
+chmod +x decodeur.sh
 [ -e encode ] && rm encode Encode.c
 
-[ ! -e "$1" ] && cat <<TAG >> decodeur.sh
+cat <<TAG >> decodeur.sh
 rm decode Decode.c
 TAG
 
